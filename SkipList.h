@@ -66,23 +66,23 @@ public:
 	bool SkipList::search(int numberToFind)
 	{
 		bool found = false;
-		/*
-		Node *currentNode = structure; // <-- needs to be whatever node is in skiplist
+		
+		Node *currentNode = structure[structure.size() -1]; // <-- needs to be whatever node is in skiplist
 		for (int i = structure.size() - 1; i >= 0; i--)
 		{
-			while (currentNode->after[i] != NULL && currentNode->after[i]->value < numberToFind)
+			while (currentNode->next[i] != NULL && currentNode->next[i]->element < numberToFind)
 			{
-				currentNode = currentNode->after[i];
+				currentNode = currentNode->next[i];
 			}
 		}
-		currentNode = currentNode->forw[0];
-		if(currentNode != NULL && currentNode->value == NumberToFind)
+		currentNode = currentNode->next[0];
+		if(currentNode != NULL && currentNode->element == numberToFind)
 		{
 			found = true;
 			return found;
 		}
 		return ;
-		*/
+		
 		return found;
 	}
 
