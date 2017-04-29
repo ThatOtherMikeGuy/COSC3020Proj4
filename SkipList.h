@@ -53,7 +53,7 @@ private:
 		}
 	}
 
-	vector<Node*> structure;
+	vector<vector<Node>*> structure;
 	double size;
 	
 public:
@@ -91,9 +91,10 @@ public:
 		// if skiplist is empty create the first level
 		if (structure.empty())
 		{
-			
+			vector<Node> structureToInsert;
 			Node nodeToInsert(numberToInsert, nullptr);
-			structure.push_back(nodeToInsert);
+			structureToInsert.push_back(nodeToInsert);
+			structure;
 		}
 		// skiplist contains enough elements for another level, add another level
 		else if (size == 2 ^ structure.size())
