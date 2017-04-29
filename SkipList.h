@@ -11,6 +11,7 @@ using namespace std;
 class SkipList
 {
 private:
+	// Nodes provide access to element and the previous and next nodes
 	class Node
 	{
 		Node* before;
