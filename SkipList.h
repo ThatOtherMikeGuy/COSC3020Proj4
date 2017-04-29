@@ -46,10 +46,6 @@ private:
 			return false;
 		}
 	}
-
-	vector<Node*> structure;
-	double size =- 99;
-
 	Node structure;
 	double size;
 
@@ -65,9 +61,9 @@ public:
 	{
 		bool found = false;
 		
-		Node *currentPointer = structure[structure.size() -1];
+		Node *currentPointer = structure.next[structure.next.size()-1];
 		//currentPointer->element;
-		for (int i = structure.size() - 1; i >= 0; i--)
+		for (int i = structure.next.size() - 1; i >= 0; i--)
 		{
 			while (currentPointer->next[i] != NULL && currentPointer->next[i]->element < numberToFind)
 			{
@@ -122,7 +118,7 @@ public:
 		}
 
 		// insert numberToInsert in the proper location within skiplist
-		Node* currentPointer = structure[structure.next.size() - 1];
+		Node *currentPointer = structure.next[structure.next.size() - 1];
 		vector<Node*> tmp;
 		for (int i = structure.next.size() - 1; i >= 0; i--)
 		{
@@ -145,10 +141,6 @@ public:
 
 	}
 
-	double SkipList::getSize()
-	{
-		return size;
-	}
 	double SkipList::size()
 
 	{
@@ -157,7 +149,7 @@ public:
 
 	void SkipList::display()
 	{
-		const Node *currentPointer = structure[0];
+		const Node *currentPointer = structure.next[0];
 		while (currentPointer != NULL)
 		{
 			cout << currentPointer->element;
