@@ -28,31 +28,6 @@ private:
 		}
 	};
 
-	// Obtain the Node that this element will come after
-	bool SkipList::search(int numberToFind,Node & n)
-	{
-		bool found = false;
-		Node *currentNode = structure[structure.size() - 1];
-		for (int i = structure.size() - 1; i >= 0; i--)
-		{
-			while (currentNode->next[i] != NULL && currentNode->next[i]->element < numberToFind)
-			{
-				currentNode = currentNode->next[i];
-			}
-		}
-		currentNode = currentNode->next[0];
-		if (currentNode != NULL && currentNode->element == numberToFind)
-		{
-			found = true;
-			n = *currentNode;
-			return found;
-		
-		}
-		//else
-		n = *currentNode;
-		return found;
-	}
-
 	// choose whether or not the element will be added to a level
 	bool addToLevel()
 	{
@@ -146,5 +121,18 @@ public:
 	double size()
 	{
 		return size;
+	}
+
+	void SkipList::display()
+	{
+		const Node *currentPointer = structure[0];
+		while (currentPointer != NULL)
+		{
+			cout << currentPointer->element;
+			currentPointer = currentPointer->next[0];
+			if (currentPointer != NULL)
+				cout << " - ";
+		}
+		cout << endl;
 	}
 };
