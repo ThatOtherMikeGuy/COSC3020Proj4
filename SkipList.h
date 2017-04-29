@@ -44,6 +44,10 @@ public:
 	bool SkipList::search(int numberToFind)
 	{
 		bool found = false;
+		// look for top level of nodes
+		// determin whether to look left or right // from current spot
+		// look for next top level
+		// go back to top
 		return found;
 	}
 
