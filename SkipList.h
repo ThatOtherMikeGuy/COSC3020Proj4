@@ -11,11 +11,29 @@ using namespace std;
 
 class SkipList
 {
-	private vector<list> structure;
+private:
+	vector<list> structure;
 	
-	public SkipList()
+public:
+
+	SkipList:: SkipList()
 	{
 		// test comment
 		//ok
+	}
+
+	void SkipList::search()
+	{
+
+	}
+
+	void SkipList::insert()
+	{
+
+	}
+
+	void SkipList::remove()
+	{
+
 	}
 };
