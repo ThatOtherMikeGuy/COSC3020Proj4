@@ -7,16 +7,26 @@
 using namespace std;
 
 #include <vector>;
-#include <list>;
 
 class SkipList
 {
 private:
-	vector<list> structure;
+	class Node
+	{
+		int* before, after;
+		int element;
+
+		Node::Node()
+		{
+
+		}
+	};
+
+	vector<Node> structure;
 	
 public:
 
-	SkipList:: SkipList()
+	SkipList::SkipList()
 	{
 		// test comment
 		// You suck!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
