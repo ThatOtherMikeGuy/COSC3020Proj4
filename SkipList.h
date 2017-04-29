@@ -15,9 +15,14 @@ private:
 	// Nodes provide access to element and the previous and next nodes
 	class Node
 	{
+	private:
+
+		vector<Node> nodeStructure;
 		Node* before;
 		int element;
 		Node* after;
+
+	public:
 
 		Node::Node(Node* b, int e, Node* a)
 		{
@@ -44,7 +49,10 @@ public:
 
 	void SkipList::insert(int numberToInsert)
 	{
+		if (structure.empty())
+		{
 
+		}
 	}
 
 	void SkipList::remove(int numberToRemove)
