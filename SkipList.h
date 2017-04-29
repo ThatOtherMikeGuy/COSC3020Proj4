@@ -92,17 +92,17 @@ public:
 		int highestLevel = 0;
 
 		// Skiplist is empty. Create the first level
-		if (structure.empty())
+		if (structure.next.empty())
 		{
-			structure.push_back(&nodeToInsert);
+			structure.next.push_back(&nodeToInsert);
 			return;
 		}
 
-		if (size == 2 ^ structure.size()) // skiplist contains enough elements for another level
+		if (size == 2 ^ structure.next.size()) // skiplist contains enough elements for another level
 		{
 			// add another level and include numberToInsert in that level
-			structure.push_back(nullptr);
-			highestLevel = structure.size() - 1;
+			structure.next.push_back(nullptr);
+			highestLevel = structure.next.size() - 1;
 			for (int i = 1; i < highestLevel; i++)
 			{
 				nodeToInsert.next.push_back(nullptr);
@@ -111,7 +111,7 @@ public:
 		else
 		{
 			// determine pseudo-randomly the highest level numberToInsert exists in
-			for (int i = 1; i < structure.size(); i++)
+			for (int i = 1; i < structure.next.size(); i++)
 			{
 				if (addToLevel() && highestLevel == i-1)
 				{
@@ -122,9 +122,9 @@ public:
 		}
 
 		// insert numberToInsert in the proper location within skiplist
-		Node* currentPointer = structure[structure.size() - 1];
+		Node* currentPointer = structure[structure.next.size() - 1];
 		vector<Node*> tmp;
-		for (int i = structure.size() - 1; i >= 0; i--)
+		for (int i = structure.next.size() - 1; i >= 0; i--)
 		{
 			while (currentPointer->next[i] != NULL && currentPointer->element < numberToInsert)
 			{
