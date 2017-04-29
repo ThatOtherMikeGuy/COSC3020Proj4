@@ -21,6 +21,11 @@ private:
 		int element;
 		vector<Node*> next;
 
+		Node::Node()
+		{
+			element = -99999999;
+		}
+
 		Node::Node(int e, vector<Node*> a)
 		{
 			element = e;
@@ -42,7 +47,7 @@ private:
 		}
 	}
 
-	vector<Node*> structure;
+	Node structure;
 	double size;
 	
 public:
@@ -69,7 +74,6 @@ public:
 		if(currentPointer != NULL && currentPointer->element == numberToFind)
 		{
 			found = true;
-			return found;
 		}
 		return found;
 	}
@@ -77,13 +81,13 @@ public:
 	void SkipList::insert(int numberToInsert)
 	{
 		vector<Node*> nodePointers;
-		int highestLevel;
+		nodePointers.push_back(nullptr);
+		Node nodeToInsert(numberToInsert, nodePointers);
+		int highestLevel = 0;
 
 		// Skiplist is empty. Create the first level
 		if (structure.empty())
 		{
-			nodePointers.push_back(nullptr);
-			Node nodeToInsert(numberToInsert, nodePointers);
 			structure.push_back(&nodeToInsert);
 			return;
 		}
@@ -93,6 +97,10 @@ public:
 			// add another level and include numberToInsert in that level
 			structure.push_back(nullptr);
 			highestLevel = structure.size() - 1;
+			for (int i = 1; i < highestLevel; i++)
+			{
+				nodeToInsert.next.push_back(nullptr);
+			}
 		}
 		else
 		{
@@ -101,13 +109,26 @@ public:
 			{
 				if (addToLevel() && highestLevel == i-1)
 				{
+					nodeToInsert.next.push_back(nullptr);
 					highestLevel = i;
 				}
 			}
 		}
 
 		// insert numberToInsert in the proper location within skiplist
-		
+		Node* currentPointer = structure[structure.size() - 1];
+		vector<Node*> tmp;
+		for (int i = structure.size() - 1; i >= 0; i--)
+		{
+			while (currentPointer->next[i] != NULL && currentPointer->element < numberToInsert)
+			{
+				currentPointer = currentPointer->next[i];
+			}
+			if (i <= highestLevel)
+			{
+				tmp.push_back(currentPointer);
+			}
+		}
 
 		// increment the total number of elements in the skiplist
 		size++;
@@ -118,7 +139,7 @@ public:
 
 	}
 
-	double size()
+	double SkipList::size()
 	{
 		return size;
 	}
