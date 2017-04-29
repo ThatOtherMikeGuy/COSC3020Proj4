@@ -13,12 +13,15 @@ class SkipList
 private:
 	class Node
 	{
-		int* before, after;
+		Node* before;
 		int element;
+		Node* after;
 
-		Node::Node()
+		Node::Node(Node* b, int e, Node* a)
 		{
-
+			before = b;
+			element = e;
+			after = a;
 		}
 	};
 
