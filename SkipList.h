@@ -32,10 +32,24 @@ private:
 	bool SkipList::search(int numberToFind,Node & n)
 	{
 		bool found = false;
-		// look for top level of nodes
-		// determin whether to look left or right // from current spot
-		// look for next top level
-		// go back to top
+		Node *currentNode = structure[structure.size() - 1];
+		for (int i = structure.size() - 1; i >= 0; i--)
+		{
+			while (currentNode->next[i] != NULL && currentNode->next[i]->element < numberToFind)
+			{
+				currentNode = currentNode->next[i];
+			}
+		}
+		currentNode = currentNode->next[0];
+		if (currentNode != NULL && currentNode->element == numberToFind)
+		{
+			found = true;
+			n = *currentNode;
+			return found;
+		
+		}
+		//else
+		n = *currentNode;
 		return found;
 	}
 
@@ -67,16 +81,17 @@ public:
 	{
 		bool found = false;
 		
-		Node *currentNode = structure[structure.size() -1];
+		Node *currentPointer = structure[structure.size() -1];
+		//currentPointer->element;
 		for (int i = structure.size() - 1; i >= 0; i--)
 		{
-			while (currentNode->next[i] != NULL && currentNode->next[i]->element < numberToFind)
+			while (currentPointer->next[i] != NULL && currentPointer->next[i]->element < numberToFind)
 			{
-				currentNode = currentNode->next[i];
+				currentPointer = currentPointer->next[i];
 			}
 		}
-		currentNode = currentNode->next[0];
-		if(currentNode != NULL && currentNode->element == numberToFind)
+		currentPointer = currentPointer->next[0];
+		if(currentPointer != NULL && currentPointer->element == numberToFind)
 		{
 			found = true;
 			return found;
