@@ -16,5 +16,6 @@ class SkipList
 	public SkipList()
 	{
 		// test comment
+		//ok
 	}
 };
