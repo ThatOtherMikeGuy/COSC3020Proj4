@@ -43,7 +43,7 @@ private:
 	}
 
 	vector<Node*> structure;
-	double size;
+	double size =- 99;
 	
 public:
 
@@ -77,7 +77,7 @@ public:
 	void SkipList::insert(int numberToInsert)
 	{
 		vector<Node*> nodePointers;
-		int highestLevel;
+		int highestLevel = 0;
 
 		// Skiplist is empty. Create the first level
 		if (structure.empty())
@@ -118,7 +118,7 @@ public:
 
 	}
 
-	double size()
+	double SkipList::getSize()
 	{
 		return size;
 	}
