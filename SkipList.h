@@ -66,10 +66,23 @@ public:
 	bool SkipList::search(int numberToFind)
 	{
 		bool found = false;
-		// look for top level of nodes
-		// determin whether to look left or right // from current spot
-		// look for next top level
-		// go back to top
+		/*
+		Node *currentNode = header; // <-- needs to be whatever node is in skiplist
+		for (int i = structure.size() - 1; i >= 0; i--)
+		{
+			while (currentNode->after[i] != NULL && currentNode->after[i]->value < numberToFind)
+			{
+				currentNode = currentNode->after[i];
+			}
+		}
+		currentNode = currentNode->forw[0];
+		if(currentNode != NULL && currentNode->value == NumberToFind)
+		{
+			found = true;
+			return found;
+		}
+		return ;
+		*/
 		return found;
 	}
 
