@@ -55,7 +55,7 @@ public:
 	{
 		if (structure.empty())
 		{
-
+			structure.push_back(new Node(nullptr, numberToInsert, nullptr));
 		}
 	}
 
