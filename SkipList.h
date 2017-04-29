@@ -113,16 +113,28 @@ public:
 			return;
 		}
 
-		// skiplist contains enough elements for another level, add another level
-		if (size == 2 ^ structure.size())
+		if (size == 2 ^ structure.size()) // skiplist contains enough elements for another level
 		{
+			// add another level and include numberToInsert in that level
 			structure.push_back(nullptr);
 			highestLevel = structure.size() - 1;
 		}
+		else
+		{
+			// determine pseudo-randomly the highest level numberToInsert exists in
+			for (int i = 1; i < structure.size(); i++)
+			{
+				if (addToLevel() && highestLevel == i-1)
+				{
+					highestLevel = i;
+				}
+			}
+		}
 
-		// insert the element somewhere in the existing skiplist
+		// insert numberToInsert in the proper location within skiplist
 		
 
+		// increment the total number of elements in the skiplist
 		size++;
 	}
 
