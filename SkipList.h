@@ -39,7 +39,8 @@ public:
 
 	void SkipList::search()
 	{
-
+		bool found = false;
+		
 	}
 
 	void SkipList::insert()
