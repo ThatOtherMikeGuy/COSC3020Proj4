@@ -36,18 +36,18 @@ public:
 		
 	}
 
-	void SkipList::search()
+	bool SkipList::search(int numberToFind)
 	{
 		bool found = false;
-		
+		return found;
 	}
 
-	void SkipList::insert()
+	void SkipList::insert(int numberToInsert)
 	{
 
 	}
 
-	void SkipList::remove()
+	void SkipList::remove(int numberToRemove)
 	{
 
 	}
