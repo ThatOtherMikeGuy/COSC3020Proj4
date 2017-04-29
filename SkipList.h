@@ -19,9 +19,9 @@ private:
 	public:
 
 		int element;
-		vector<Node>* next;
+		vector<Node*> next;
 
-		Node::Node( int e, vector<Node>* a)
+		Node::Node( int e, vector<Node*> a)
 		{
 			element = e;
 			next = a;
@@ -53,7 +53,7 @@ private:
 		}
 	}
 
-	vector<vector<Node>*> structure;
+	vector<Node> structure;
 	double size;
 	
 public:
@@ -94,42 +94,35 @@ public:
 			vector<Node> structureToInsert;
 			Node nodeToInsert(numberToInsert, nullptr);
 			structureToInsert.push_back(nodeToInsert);
-			structure;
+			structure.push_back(&structureToInsert);
 		}
 		// skiplist contains enough elements for another level, add another level
 		else if (size == 2 ^ structure.size())
 		{
+			vector<Node> structureToInsert;
 			Node nodeToInsert(numberToInsert, nullptr);
-			structure.push_back(nodeToInsert);
+			structureToInsert.push_back(nodeToInsert);
+			structure.push_back(&structureToInsert);
 		}
 		// insert the element somewhere in the existing skiplist
 		else
 		{
 			vector<Node> nextNodeStructure, thisNodeStructure;
-			int highestLevel = 0;
 			Node nodeToInsert(numberToInsert, nullptr);
 
-			// obtain vectors of Nodes for elements in the skiplist adjacent to numberToInsert
+			// obtain vector of nodes of number previous to numberToInsert
 			search(numberToInsert, nextNodeStructure);
 			
 			// decide which levels the element will exist in
+			thisNodeStructure.push_back(nodeToInsert); // always add to lowest level
 			for (int i = 0; i < structure.size(); i++)
 			{
-				if (highestLevel == i) // element is added to lower level
-				{
-					if(addToLevel()); // 50/50 chance to add to current level
-						highestLevel++;
-				}
+				if()
 			}
 
 			for (int i = 0; i < highestLevel; i++)
 			{
-				nodeToInsert.nodeStructure.push_back(nodeToInsert);
-
-				Node* tmp;
-				tmp = nextNode[i].next;
-				nextNode[i].next = &nodeToInsert.nodeStructure[i];
-				nodeToInsert. = 
+				
 			}
 
 
