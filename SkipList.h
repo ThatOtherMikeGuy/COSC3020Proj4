@@ -13,7 +13,7 @@ class SkipList
 {
 private:
 
-	// Nodes provide access to element and the previous and next nodes
+	// Node provides access to element and a vector of pointers to Nodes
 	class Node
 	{
 	public:
@@ -21,15 +21,15 @@ private:
 		int element;
 		vector<Node*> next;
 
-		Node::Node( int e, vector<Node*> a)
+		Node::Node(int e, vector<Node*> a)
 		{
 			element = e;
 			next = a;
 		}
 	};
 
-	// obtain the vectors of nodes that this element will fall between
-	bool SkipList::search(int numberToFind,vector<Node> & n)
+	// Obtain the Node that this element will come after
+	bool SkipList::search(int numberToFind,Node & n)
 	{
 		bool found = false;
 		// look for top level of nodes
@@ -53,7 +53,7 @@ private:
 		}
 	}
 
-	vector<Node> structure;
+	vector<Node*> structure;
 	double size;
 	
 public:
@@ -88,45 +88,27 @@ public:
 
 	void SkipList::insert(int numberToInsert)
 	{
-		// if skiplist is empty create the first level
+		vector<Node*> nodePointers;
+		int highestLevel;
+
+		// Skiplist is empty. Create the first level
 		if (structure.empty())
 		{
-			vector<Node> structureToInsert;
-			Node nodeToInsert(numberToInsert, nullptr);
-			structureToInsert.push_back(nodeToInsert);
-			structure.push_back(&structureToInsert);
+			nodePointers.push_back(nullptr);
+			Node nodeToInsert(numberToInsert, nodePointers);
+			structure.push_back(&nodeToInsert);
+			return;
 		}
+
 		// skiplist contains enough elements for another level, add another level
-		else if (size == 2 ^ structure.size())
+		if (size == 2 ^ structure.size())
 		{
-			vector<Node> structureToInsert;
-			Node nodeToInsert(numberToInsert, nullptr);
-			structureToInsert.push_back(nodeToInsert);
-			structure.push_back(&structureToInsert);
+			structure.push_back(nullptr);
+			highestLevel = structure.size() - 1;
 		}
+
 		// insert the element somewhere in the existing skiplist
-		else
-		{
-			vector<Node> nextNodeStructure, thisNodeStructure;
-			Node nodeToInsert(numberToInsert, nullptr);
-
-			// obtain vector of nodes of number previous to numberToInsert
-			search(numberToInsert, nextNodeStructure);
-			
-			// decide which levels the element will exist in
-			thisNodeStructure.push_back(nodeToInsert); // always add to lowest level
-			for (int i = 0; i < structure.size(); i++)
-			{
-				if()
-			}
-
-			for (int i = 0; i < highestLevel; i++)
-			{
-				
-			}
-
-
-		}
+		
 
 		size++;
 	}
