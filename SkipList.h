@@ -67,7 +67,7 @@ public:
 	{
 		bool found = false;
 		
-		Node *currentNode = structure[structure.size() -1]; // <-- needs to be whatever node is in skiplist
+		Node *currentNode = structure[structure.size() -1];
 		for (int i = structure.size() - 1; i >= 0; i--)
 		{
 			while (currentNode->next[i] != NULL && currentNode->next[i]->element < numberToFind)
@@ -81,8 +81,6 @@ public:
 			found = true;
 			return found;
 		}
-		return ;
-		
 		return found;
 	}
 
