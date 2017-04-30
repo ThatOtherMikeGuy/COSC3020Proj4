@@ -90,10 +90,7 @@ public:
 	void SkipList::insert(int numberToInsert)
 	{
 		vector<Node*> nodePointers;
-
-		nodePointers.push_back(nullptr);
 		Node nodeToInsert(numberToInsert, nodePointers);
-
 		int highestLevel = 0;
 
 		// Skiplist is empty. Create the first level
@@ -108,7 +105,7 @@ public:
 			// add another level and include numberToInsert in that level
 			structure.next.push_back(nullptr);
 			highestLevel = structure.next.size() - 1;
-			for (int i = 1; i < highestLevel; i++)
+			for (int i = 0; i < highestLevel; i++)
 			{
 				nodeToInsert.next.push_back(nullptr);
 			}
@@ -116,6 +113,7 @@ public:
 		else
 		{
 			// determine pseudo-randomly the highest level numberToInsert exists in
+			nodeToInsert.next.push_back(nullptr);
 			for (int i = 1; i < structure.next.size(); i++)
 			{
 				if (addToLevel() && highestLevel == i-1)
@@ -179,7 +177,7 @@ public:
 
 	void SkipList::display()
 	{
-		const Node *currentPointer = structure.next[0];
+		Node *currentPointer = structure.next[0];
 		while (currentPointer != NULL)
 		{
 			cout << currentPointer->element;
