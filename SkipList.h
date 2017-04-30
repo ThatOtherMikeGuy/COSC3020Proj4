@@ -69,7 +69,7 @@ public:
 	{
 		bool found = false;
 		
-		Node *currentPointer = structure.next[structure.next.size()-1];
+		Node *currentPointer = &structure;
 		//currentPointer->element;
 		for (int i = structure.next.size() - 1; i >= 0; i--)
 		{
@@ -172,8 +172,7 @@ public:
 
 	}
 
-	double SkipList::size()
-
+	double SkipList::getSize()
 	{
 		return size;
 	}
