@@ -126,13 +126,8 @@ public:
 			}
 		}
 
-<<<<<<< HEAD
 		// acquire all pointers that should be pointing to numberToInsert once it is inserted
 		Node* currentPointer = &structure;
-=======
-		// insert numberToInsert in the proper location within skiplist
-		Node *currentPointer = structure.next[structure.next.size() - 1];
->>>>>>> origin/master
 		vector<Node*> tmp;
 		for (int i = 0; i < highestLevel; i++)
 		{
