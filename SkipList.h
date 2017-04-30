@@ -75,6 +75,7 @@ public:
 		{
 			found = true;
 		}
+		delete currentPointer;
 		return found;
 	}
 
@@ -157,6 +158,7 @@ public:
 			if (currentPointer != NULL)
 				cout << " - ";
 		}
+		delete currentPointer;
 		cout << endl;
 	}
 };
