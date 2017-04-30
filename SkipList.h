@@ -54,9 +54,9 @@ private:
 			return false;
 		}
 	}
-
 	Node structure;
 	double size;
+
 	
 public:
 
@@ -69,9 +69,9 @@ public:
 	{
 		bool found = false;
 		
-		Node *currentPointer = structure[structure.size() -1];
+		Node *currentPointer = structure.next[structure.next.size()-1];
 		//currentPointer->element;
-		for (int i = structure.size() - 1; i >= 0; i--)
+		for (int i = structure.next.size() - 1; i >= 0; i--)
 		{
 			while (currentPointer->next[i] != NULL && currentPointer->next[i]->element < numberToFind)
 			{
@@ -83,14 +83,17 @@ public:
 		{
 			found = true;
 		}
+		delete currentPointer;
 		return found;
 	}
 
 	void SkipList::insert(int numberToInsert)
 	{
 		vector<Node*> nodePointers;
+
 		nodePointers.push_back(nullptr);
 		Node nodeToInsert(numberToInsert, nodePointers);
+
 		int highestLevel = 0;
 
 		// Skiplist is empty. Create the first level
@@ -123,8 +126,13 @@ public:
 			}
 		}
 
+<<<<<<< HEAD
 		// acquire all pointers that should be pointing to numberToInsert once it is inserted
 		Node* currentPointer = &structure;
+=======
+		// insert numberToInsert in the proper location within skiplist
+		Node *currentPointer = structure.next[structure.next.size() - 1];
+>>>>>>> origin/master
 		vector<Node*> tmp;
 		for (int i = 0; i < highestLevel; i++)
 		{
@@ -170,6 +178,7 @@ public:
 	}
 
 	double SkipList::size()
+
 	{
 		return size;
 	}
@@ -184,6 +193,7 @@ public:
 			if (currentPointer != NULL)
 				cout << " - ";
 		}
+		delete currentPointer;
 		cout << endl;
 	}
 };
