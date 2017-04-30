@@ -31,6 +31,14 @@ private:
 			element = e;
 			next = a;
 		}
+
+		Node::~Node()
+		{
+			for (int i = 0; i < next.size(); i++)
+			{
+				delete next[i];
+			}
+		}
 	};
 
 	// choose whether or not the element will be added to a level
@@ -115,19 +123,41 @@ public:
 			}
 		}
 
-		// insert numberToInsert in the proper location within skiplist
-		Node* currentPointer = structure[structure.next.size() - 1];
+		// acquire all pointers that should be pointing to numberToInsert once it is inserted
+		Node* currentPointer = &structure;
 		vector<Node*> tmp;
+		for (int i = 0; i < highestLevel; i++)
+		{
+			tmp.push_back(nullptr);
+		}
 		for (int i = structure.next.size() - 1; i >= 0; i--)
 		{
-			while (currentPointer->next[i] != NULL && currentPointer->element < numberToInsert)
+			while (currentPointer->next[i] != NULL && currentPointer->next[i]->element < numberToInsert)
 			{
 				currentPointer = currentPointer->next[i];
 			}
 			if (i <= highestLevel)
 			{
-				tmp.push_back(currentPointer);
+				tmp[i] = currentPointer;
 			}
+		}
+
+		// Rearrange pointers to effectively insert numberToInsert
+		for (int i = 0; i < highestLevel; i++)
+		{
+			nodeToInsert.next[i] = tmp[i]->next[i];
+			tmp[i]->next[i] = &nodeToInsert;
+		}
+
+		// Delete all local pointers
+		delete currentPointer;
+		for (int i = 0; i < highestLevel; i++)
+		{
+			delete tmp[i];
+		}
+		for (int i = 0; i < nodePointers.size(); i++)
+		{
+			delete nodePointers[i];
 		}
 
 		// increment the total number of elements in the skiplist
@@ -146,7 +176,7 @@ public:
 
 	void SkipList::display()
 	{
-		const Node *currentPointer = structure[0];
+		const Node *currentPointer = structure.next[0];
 		while (currentPointer != NULL)
 		{
 			cout << currentPointer->element;
