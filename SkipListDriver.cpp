@@ -78,13 +78,14 @@ int main()
 				<< "Please wait." << endl;
 			for (int i = 0; i < testNum; i++)
 			{
-				if (i = testNum / 2)
+				if (i == testNum / 2)
 				{
 					cout << "Half way done." << endl;
 				}
-				randomNum = randNumGen(500000,1);
+				randomNum = randNumGen(1000,1);
 				ss.insert(randomNum);
 			}
+			break;
 		case 6:
 			exit(1);
 			break;
