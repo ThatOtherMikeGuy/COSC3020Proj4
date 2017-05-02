@@ -69,6 +69,12 @@ public:
 	{
 		bool found = false;
 		
+		// Skiplist is empty.
+		if (structure.next.empty())
+		{
+			return false;
+		}
+
 		Node *currentPointer = &structure;
 		
 		for (int i = structure.next.size() - 1; i >= 0; i--)
@@ -156,7 +162,7 @@ public:
 
 	void SkipList::remove(int numberToRemove)
 	{
-		// Skiplist is empty. Create the first level
+		// Skiplist is empty.
 		if (structure.next.empty())
 		{
 			cout << endl << "Skiplist is empty." << endl;
@@ -165,6 +171,7 @@ public:
 
 		// acquire all pointers that should be pointing to numberToInsert once it is inserted
 		int highestLevel = 0;
+		bool found = false;
 		Node* currentPointer = &structure;
 		vector<Node*> tmp;
 		for (int i = 0; i < structure.next.size(); i++)
@@ -184,15 +191,36 @@ public:
 				{
 					highestLevel = i;
 				}
+				found = true;
 			}
 		}
 
 		// Rearrange pointers to effectively insert numberToInsert
-		Node* tmp;
-		for (int i = 0; i <= highestLevel; i++)
+		if (found)
 		{
-			//tmp = 
-			//tmp[i]->next[i] = nodeToInsert;
+			Node* temp;
+			for (int i = 0; i <= highestLevel; i++)
+			{
+				temp = tmp[i]->next[i]->next[i];
+				if (i == highestLevel)
+				{
+					delete tmp[i]->next[i];
+				}
+				tmp[i]->next[i] = temp;
+			}
+			
+			cout << endl << "Element was deleted." << endl;
+			size--;
+		}
+		else
+		{
+			cout << endl << "Element wasn't in the skiplist." << endl;
+		}
+
+		// remove the top level if it isn't pointing to anything
+		if (structure.next[structure.next.size() - 1] == nullptr)
+		{
+			structure.next.pop_back();
 		}
 	}
 
@@ -203,6 +231,13 @@ public:
 
 	void SkipList::display()
 	{
+		// Skiplist is empty.
+		if (structure.next.empty())
+		{
+			cout << endl << "Skiplist is empty" << endl;
+			return;
+		}
+
 		Node *currentPointer = structure.next[0];
 		while (currentPointer != NULL)
 		{

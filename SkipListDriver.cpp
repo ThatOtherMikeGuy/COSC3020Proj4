@@ -53,14 +53,7 @@ int main()
 		case 2:
 			cout << "Enter the element to be deleted: ";
 			cin >> n;
-			if (!ss.search(n))
-			{
-				cout << "Element not found" << endl;
-				break;
-			}
 			ss.remove(n);
-			if (!ss.search(n))
-				cout << "Element Deleted" << endl;
 			break;
 		case 3:
 			cout << "Enter the element to be searched: ";
