@@ -156,7 +156,44 @@ public:
 
 	void SkipList::remove(int numberToRemove)
 	{
+		// Skiplist is empty. Create the first level
+		if (structure.next.empty())
+		{
+			cout << endl << "Skiplist is empty." << endl;
+			return;
+		}
 
+		// acquire all pointers that should be pointing to numberToInsert once it is inserted
+		int highestLevel = 0;
+		Node* currentPointer = &structure;
+		vector<Node*> tmp;
+		for (int i = 0; i < structure.next.size(); i++)
+		{
+			tmp.push_back(nullptr);
+		}
+		for (int i = structure.next.size() - 1; i >= 0; i--)
+		{
+			while (currentPointer->next[i] != NULL && currentPointer->next[i]->element < numberToRemove)
+			{
+				currentPointer = currentPointer->next[i];
+			}
+			if (currentPointer->next[i] != NULL && currentPointer->next[i]->element == numberToRemove)
+			{
+				tmp[i] = currentPointer;
+				if (i < highestLevel)
+				{
+					highestLevel = i;
+				}
+			}
+		}
+
+		// Rearrange pointers to effectively insert numberToInsert
+		Node* tmp;
+		for (int i = 0; i <= highestLevel; i++)
+		{
+			//tmp = 
+			//tmp[i]->next[i] = nodeToInsert;
+		}
 	}
 
 	double SkipList::getSize()
