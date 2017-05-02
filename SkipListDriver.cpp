@@ -26,6 +26,7 @@ int main()
 {
 	SkipList ss;
 	int choice, n, testNum, randomNum;
+	vector<int> randomNumHolder;
 	while (1)
 	{
 		cout << endl << "-----------------------" << endl;
@@ -36,7 +37,8 @@ int main()
 		cout << "3.Search Element" << endl;
 		cout << "4.Display List " << endl;
 		cout << "5.Testing " << endl;
-		cout << "6.Exit " << endl;
+		cout << "6.Clear Testing List (only works when used after 5 was chosen)" << endl;
+		cout << "7.Exit " << endl;
 		cout << "Enter your choice : ";
 		cin >> choice;
 		switch (choice)
@@ -83,10 +85,25 @@ int main()
 					cout << "Half way done." << endl;
 				}
 				randomNum = randNumGen(1000,1);
+				randomNumHolder.push_back(randomNum);
 				ss.insert(randomNum);
 			}
 			break;
 		case 6:
+			cout << "Clearing the list. " << endl
+				<< "Please wait." << endl;
+			for (int i = 0; i < randomNumHolder.size(); i++)
+			{
+				if (i == randomNumHolder.size() / 2)
+				{
+					cout << "Half way done." << endl;
+				}
+				ss.remove(randomNumHolder[i]);
+			}
+			randomNumHolder.clear();
+			cout << "OK. Cleared the skip list for you." << endl;
+			break;
+		case 7:
 			exit(1);
 			break;
 		default:
