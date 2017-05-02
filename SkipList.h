@@ -83,7 +83,6 @@ public:
 		{
 			found = true;
 		}
-		//delete currentPointer;
 		return found;
 	}
 
@@ -99,11 +98,6 @@ public:
 		{
 			structure.next.push_back(nodeToInsert);
 			size++;
-			// Delete all local pointers
-			//for (int i = 0; i < nodePointers.size(); i++)
-			//{
-			//	delete nodePointers[i];
-			//}
 			return;
 		}
 
@@ -134,7 +128,7 @@ public:
 		// acquire all pointers that should be pointing to numberToInsert once it is inserted
 		Node* currentPointer = &structure;
 		vector<Node*> tmp;
-		for (int i = 0; i < highestLevel; i++)
+		for (int i = 0; i <= highestLevel; i++)
 		{
 			tmp.push_back(nullptr);
 		}
@@ -151,24 +145,12 @@ public:
 		}
 
 		// Rearrange pointers to effectively insert numberToInsert
-		for (int i = 0; i < highestLevel; i++)
+		for (int i = 0; i <= highestLevel; i++)
 		{
 			nodeToInsert->next[i] = tmp[i]->next[i];
 			tmp[i]->next[i] = nodeToInsert;
 		}
 
-		// Delete all local pointers
-		delete currentPointer;
-		for (int i = 0; i < highestLevel; i++)
-		{
-			delete tmp[i];
-		}
-		for (int i = 0; i < nodePointers.size(); i++)
-		{
-			delete nodePointers[i];
-		}
-
-		// increment the total number of elements in the skiplist
 		size++;
 	}
 
@@ -190,7 +172,7 @@ public:
 			cout << currentPointer->element;
 			currentPointer = currentPointer->next[0];
 			if (currentPointer != NULL)
-				cout << " - ";
+				cout << "   ";
 		}
 		delete currentPointer;
 		cout << endl;
