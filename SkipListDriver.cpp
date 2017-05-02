@@ -4,15 +4,28 @@
 // SkipListDriver.cpp
 // 04-29-17
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <iomanip>
+#include <random>
 
 #include "SkipList.h"
 
 using namespace std;
 
+int randNumGen(int top, int bottom)
+{
+	random_device rand_dev;
+	mt19937 generator(rand_dev());
+	uniform_int_distribution<int> distr(bottom, top);
+	int seed = distr(generator);
+	return seed;
+}
+
 int main()
 {
 	SkipList ss;
-	int choice, n;
+	int choice, n, testNum, randomNum;
 	while (1)
 	{
 		cout << endl << "-----------------------" << endl;
@@ -22,7 +35,8 @@ int main()
 		cout << "2.Delete Element" << endl;
 		cout << "3.Search Element" << endl;
 		cout << "4.Display List " << endl;
-		cout << "5.Exit " << endl;
+		cout << "5.Testing " << endl;
+		cout << "6.Exit " << endl;
 		cout << "Enter your choice : ";
 		cin >> choice;
 		switch (choice)
@@ -58,6 +72,20 @@ int main()
 			ss.display();
 			break;
 		case 5:
+			cout << "Enter how many elements you want to be inserted: " << endl;
+			cin >> testNum;
+			cout << "OK. Making a skip list with " << testNum << " numbers." << endl
+				<< "Please wait." << endl;
+			for (int i = 0; i < testNum; i++)
+			{
+				if (i = testNum / 2)
+				{
+					cout << "Half way done." << endl;
+				}
+				randomNum = randNumGen(500000,1);
+				ss.insert(randomNum);
+			}
+		case 6:
 			exit(1);
 			break;
 		default:
