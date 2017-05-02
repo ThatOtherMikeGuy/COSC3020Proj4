@@ -37,7 +37,7 @@ int main()
 		cout << "3.Search Element" << endl;
 		cout << "4.Display List " << endl;
 		cout << "5.Testing " << endl;
-		cout << "6.Clear Testing List (only works when used after 5 was chosen)" << endl;
+		cout << "6.Clear List " << endl;
 		cout << "7.Exit " << endl;
 		cout << "Enter your choice : ";
 		cin >> choice;
@@ -47,6 +47,7 @@ int main()
 			cout << "Enter the element to be inserted: ";
 			cin >> n;
 			ss.insert(n);
+			randomNumHolder.push_back(n);
 			if (ss.search(n))
 				cout << "Element Inserted" << endl;
 			break;
