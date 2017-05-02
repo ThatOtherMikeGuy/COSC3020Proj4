@@ -70,7 +70,7 @@ public:
 		bool found = false;
 		
 		Node *currentPointer = &structure;
-		//currentPointer->element;
+		
 		for (int i = structure.next.size() - 1; i >= 0; i--)
 		{
 			while (currentPointer->next[i] != NULL && currentPointer->next[i]->element < numberToFind)
@@ -83,20 +83,27 @@ public:
 		{
 			found = true;
 		}
-		delete currentPointer;
+		//delete currentPointer;
 		return found;
 	}
 
 	void SkipList::insert(int numberToInsert)
 	{
 		vector<Node*> nodePointers;
-		Node nodeToInsert(numberToInsert, nodePointers);
+		nodePointers.push_back(nullptr);
+		Node* nodeToInsert = new Node(numberToInsert, nodePointers);
 		int highestLevel = 0;
 
 		// Skiplist is empty. Create the first level
 		if (structure.next.empty())
 		{
-			structure.next.push_back(&nodeToInsert);
+			structure.next.push_back(nodeToInsert);
+			size++;
+			// Delete all local pointers
+			//for (int i = 0; i < nodePointers.size(); i++)
+			//{
+			//	delete nodePointers[i];
+			//}
 			return;
 		}
 
@@ -107,18 +114,18 @@ public:
 			highestLevel = structure.next.size() - 1;
 			for (int i = 0; i < highestLevel; i++)
 			{
-				nodeToInsert.next.push_back(nullptr);
+				nodeToInsert->next.push_back(nullptr);
 			}
 		}
 		else
 		{
 			// determine pseudo-randomly the highest level numberToInsert exists in
-			nodeToInsert.next.push_back(nullptr);
+			nodeToInsert->next.push_back(nullptr);
 			for (int i = 1; i < structure.next.size(); i++)
 			{
 				if (addToLevel() && highestLevel == i-1)
 				{
-					nodeToInsert.next.push_back(nullptr);
+					nodeToInsert->next.push_back(nullptr);
 					highestLevel = i;
 				}
 			}
@@ -146,8 +153,8 @@ public:
 		// Rearrange pointers to effectively insert numberToInsert
 		for (int i = 0; i < highestLevel; i++)
 		{
-			nodeToInsert.next[i] = tmp[i]->next[i];
-			tmp[i]->next[i] = &nodeToInsert;
+			nodeToInsert->next[i] = tmp[i]->next[i];
+			tmp[i]->next[i] = nodeToInsert;
 		}
 
 		// Delete all local pointers

@@ -31,8 +31,8 @@ int main()
 			cout << "Enter the element to be inserted: ";
 			cin >> n;
 			ss.insert(n);
-			//if (ss.search(n))
-				//cout << "Element Inserted" << endl;
+			if (ss.search(n))
+				cout << "Element Inserted" << endl;
 			break;
 		case 2:
 			cout << "Enter the element to be deleted: ";
