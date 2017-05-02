@@ -13,7 +13,7 @@
 
 using namespace std;
 
-int randNumGen(int top, int bottom)
+int randNumGen(int bottom, int top)
 {
 	random_device rand_dev;
 	mt19937 generator(rand_dev());
@@ -84,7 +84,7 @@ int main()
 				{
 					cout << "Half way done." << endl;
 				}
-				randomNum = randNumGen(1000,1);
+				randomNum = randNumGen(1,1000);
 				randomNumHolder.push_back(randomNum);
 				ss.insert(randomNum);
 			}
