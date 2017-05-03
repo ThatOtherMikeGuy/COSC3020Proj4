@@ -107,7 +107,7 @@ public:
 			return;
 		}
 
-		if (size == 2 ^ structure.next.size()) // skiplist contains enough elements for another level
+		if (size == pow(2,structure.next.size())) // skiplist contains enough elements for another level
 		{
 			// add another level and include numberToInsert in that level
 			structure.next.push_back(nullptr);
@@ -160,18 +160,17 @@ public:
 		size++;
 	}
 
-	void SkipList::remove(int numberToRemove)
+	void SkipList::remove(int numberToRemove, bool & found)
 	{
 		// Skiplist is empty.
 		if (structure.next.empty())
 		{
-			cout << endl << "Skiplist is empty." << endl;
 			return;
 		}
 
 		// acquire all pointers that should be pointing to numberToInsert once it is inserted
 		int highestLevel = 0;
-		bool found = false;
+		found = false;
 		Node* currentPointer = &structure;
 		vector<Node*> tmp;
 		for (int i = 0; i < structure.next.size(); i++)
@@ -187,7 +186,7 @@ public:
 			if (currentPointer->next[i] != NULL && currentPointer->next[i]->element == numberToRemove)
 			{
 				tmp[i] = currentPointer;
-				if (i < highestLevel)
+				if (i > highestLevel)
 				{
 					highestLevel = i;
 				}
@@ -198,27 +197,18 @@ public:
 		// Rearrange pointers to effectively insert numberToInsert
 		if (found)
 		{
-			Node* temp;
+			Node* temp = structure.next[0];
 			for (int i = 0; i <= highestLevel; i++)
 			{
 				temp = tmp[i]->next[i]->next[i];
-				if (i == highestLevel)
-				{
-					delete tmp[i]->next[i];
-				}
 				tmp[i]->next[i] = temp;
 			}
 			
-			cout << endl << "Element was deleted." << endl;
 			size--;
 		}
-		else
-		{
-			cout << endl << "Element wasn't in the skiplist." << endl;
-		}
 
-		// remove the top level if it isn't pointing to anything
-		if (structure.next[structure.next.size() - 1] == nullptr)
+		// remove the top levels that aren't pointing to anything
+		while (structure.next.size() > 0 && structure.next[structure.next.size() - 1] == nullptr)
 		{
 			structure.next.pop_back();
 		}
@@ -234,7 +224,6 @@ public:
 		// Skiplist is empty.
 		if (structure.next.empty())
 		{
-			cout << endl << "Skiplist is empty" << endl;
 			return;
 		}
 
