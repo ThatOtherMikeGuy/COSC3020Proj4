@@ -10,17 +10,9 @@
 #include <random>
 
 #include "SkipList.h"
+#include "winTImer.h"
 
 using namespace std;
-
-int randNumGen(int bottom, int top)
-{
-	random_device rand_dev;
-	mt19937 generator(rand_dev());
-	uniform_int_distribution<int> distr(bottom, top);
-	int seed = distr(generator);
-	return seed;
-}
 
 int main()
 {
@@ -28,6 +20,10 @@ int main()
 	int choice, n, testNum, randomNum;
 	vector<int> randomNumHolder;
 	bool empty = true, found = false;
+	random_device rand_dev;
+	mt19937 generator(rand_dev());
+	uniform_int_distribution<int> distr(1, 10000000);
+
 	while (1)
 	{
 		cout << endl << "-----------------------" << endl;
@@ -42,36 +38,49 @@ int main()
 		cout << "7.Exit " << endl;
 		cout << "Enter your choice : ";
 		cin >> choice;
+		Timer insertTimer;
+		Timer deleteTimer;
+		Timer searchTimer;
 		switch (choice)
 		{
 		case 1:
 			cout << "Enter the element to be inserted: ";
 			cin >> n;
+			insertTimer.start();
 			ss.insert(n);
+			insertTimer.stop();
 			empty = false;
 			randomNumHolder.push_back(n);
 			cout << endl << "Element (" << n << ") was inserted into Skiplist." << endl;
+			cout << "Time: " << insertTimer() << endl;
 			break;
 		case 2:
 			cout << "Enter the element to be deleted: ";
 			cin >> n;
+			deleteTimer.start();
 			ss.remove(n,found);
+			deleteTimer.stop();
 			if (found)
 				cout << endl << "Element (" << n << ") was removed from Skiplist." << endl;
 			else
 				cout << endl << "Element (" << n << ") wasn't in the Skiplist." << endl;
 			if (ss.getSize() == 0)
 				cout << endl << "Skiplist is empty." << endl;
+			cout << "Time: " << deleteTimer() << endl;
 			break;
 		case 3:
 			cout << "Enter the element to be searched: ";
 			cin >> n;
-			if (ss.search(n))
+			searchTimer.start();
+			found = ss.search(n);
+			searchTimer.stop();
+			if (found)
 				cout << endl << "Element (" << n << ") is in the Skiplist." << endl;
 			else if (ss.getSize() == 0)
 				cout << endl << "Skiplist is empty." << endl;
 			else
 				cout << endl << "Element (" << n << ") isn't in the Skiplist." << endl;
+			cout << "Time: " << searchTimer() << endl;
 			break;
 		case 4:
 			if (ss.getSize() == 0)
@@ -105,7 +114,7 @@ int main()
 			{
 				if (i == testNum / 2)
 					cout << "Half way done." << endl << endl;
-				randomNum = randNumGen(1,1000);
+				randomNum = distr(generator);
 				randomNumHolder.push_back(randomNum);
 				ss.insert(randomNum);
 			}
